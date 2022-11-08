@@ -10,44 +10,32 @@
 */
 void insertion_sort_list(listint_t **list)
 {
-	bool flag = false;
-	listint_t *tmp = NULL, *aux = NULL;
+	listint_t *node = NULL, *tmp = NULL;
 
-	if (!list || !(*list) || !(*list)->next)
-	return;
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+		return;
 
-	tmp = *list;
-	while (tmp->next)
+	node = *list;
+	node = node->next;
+	while (node)
 	{
-		if (tmp->n > tmp->next->n)
+		while (node->prev && node->n < (node->prev)->n)
 		{
-			tmp->next->prev = tmp->prev;
-			if (tmp->next->prev)
-				tmp->prev->next = tmp->next;
-			else
-				*list = tmp->next;
-				tmp->prev = tmp->next;
-				tmp->next = tmp->next->next
-				tmp->prev->next = tmp;
-				if (tmp->next)
-
-				tmp->next->prev = tmp;
-				tmp = tmp->prev;
-				print_list(*list);
-
-				if (tmp->prev && tmp->prev->n > tmp->n)
-
-				{
-					if (!flag)
-						aux = tmp->next;
-					flag = true;
-					tmp = tmp->prev;
-					continue;
-				}
+			tmp = node;
+			if (node->next)
+				(node->next)->prev = tmp->prev;
+			(node->prev)->next = tmp->next;
+			node = node->prev;
+			tmp->prev = node->prev;
+			tmp->next = node;
+			if (node->prev)
+				(node->prev)->next = tmp;
+			node->prev = tmp;
+			if (tmp->prev == NULL)
+				*list = tmp;
+			print_list(*list);
+			node = node->prev;
 		}
-		if (!flag)
-			tmp = tmp->next;
-		else
-			tmp = aux, flag = false;
+		node = node->next;
 	}
 }
