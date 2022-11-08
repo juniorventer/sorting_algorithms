@@ -9,69 +9,68 @@
 */
 void quick_sort(int *array, size_t size)
 {
-	if (!array || size < 2)
+	if (array == NULL || size < 2)
 		return;
 
 	quick_sort_rec(array, 0, size - 1, size);
 }
 
 /**
- * quick_sort_rec - ...
- * @array: ...
- * @lower: ...
- * @higher: ...
- * @size: ...
+ * partition - partition
+ * @array: array
+ * @lo: lower
+ * @hi: higher
+ * @size: array's size
  *
- * Return: Nothing!
+ * Return: i
 */
-void quick_sort_rec(int *array, int lower, int higher, size_t size)
+int partition(int *array, int lo, int hi, size_t size)
 {
-	int l_p = 0;
+	int i = lo - 1, j = lo;
+	int pivot = array[hi], aux = 0;
 
-	if (lower < higher)
+	for (; j < hi; j++)
 	{
-		l_p = lomuto_partition(array, lower, higher, size);
-		quick_sort_rec(array, lower, l_p - 1, size);
-		quick_sort_rec(array, l_p + 1, higher, size);
+		if (array[j] < pivot)
+
+		{
+			i++;
+			if (array[i] != array[j])
+			{
+				aux = array[i];
+				array[i] = array[j];
+				array[j] = aux;
+				print_array(array, size);
+			}
+		}
 	}
+	if (array[i + 1] != array[hi])
+	{
+		aux = array[i + 1];
+		array[i + 1] = array[hi];
+		array[hi] = aux;
+		print_array(array, size);
+	}
+	return (i + 1);
 }
 
 /**
- * lomuto_partition - ...
- * @array: ...
- * @lower: ...
- * @higher: ...
- * @size: ...
+ * quick_s - quick sort
+ * @array: given array
+ * @lo: lower
+ * @hi:higher
+ * @size: array's size
  *
- * Return: Nothing!
+ * Return: void
 */
-int lomuto_partition(int *array, int lower, int higher, size_t size)
+void quick_s(int *array, int lo, int hi, size_t size)
 {
-	int i = 0, j = 0, pivot = 0, aux = 0;
+	int pivot;
 
-	pivot = array[higher];
-	i = lower;
-
-	for (j = lower; j < higher; ++j)
+	if (lo < hi)
 	{
-		if (array[j] < pivot)
-		{
-			aux = array[i];
-			array[i] = array[j];
-			array[j] = aux
-
-			if (aux != array[i])
-				print_array(array, size);
-
-			++i;
-		}											}
-
-	aux = array[i];
-	array[i] = array[higher];
-	array[higher] = aux;
-
-	if (aux != array[i])
-		print_array(array, size);
-
-	return (i);
+		pivot = partition(array, lo, hi, size);
+		quick_s(array, lo, pivot - 1, size);
+		quick_s(array, pivot + 1, hi, size);
+	}
 }
