@@ -1,5 +1,4 @@
 #include "sort.h"
-
 /**
  * quick_sort - function that sorts an array
  * of integers in ascending order
@@ -11,7 +10,6 @@ void quick_sort(int *array, size_t size)
 {
 	_qsort(array, 0, size - 1, size);
 }
-
 /**
  * _qsort - function for the
  * quick_sort function
