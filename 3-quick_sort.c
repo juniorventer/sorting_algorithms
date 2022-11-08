@@ -21,7 +21,6 @@ void quick_sort(int *array, size_t size)
  * @lo: lower
  * @hi: higher
  * @size: array's size
- *
  * Return: i
 */
 int partition(int *array, int lo, int hi, size_t size)
@@ -60,7 +59,6 @@ int partition(int *array, int lo, int hi, size_t size)
  * @lo: lower
  * @hi:higher
  * @size: array's size
- *
  * Return: void
 */
 void quick_s(int *array, int lo, int hi, size_t size)
